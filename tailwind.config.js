@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        aquamarine: '#4bffc2',
+        aquamarine: '#38e6ab',
       },
     }
   },
