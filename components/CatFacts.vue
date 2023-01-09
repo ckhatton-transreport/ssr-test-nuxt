@@ -39,13 +39,14 @@
         Next
       </button>
     </div>
-    <section class="flex flex-wrap">
-      <div v-if="loading">Loading</div>
+    <section class="flex flex-wrap relative">
+      <div class="absolute" v-if="loading">
+        <div class="flex items-center justify-center w-full">Loading</div>
+      </div>
       <div
-        v-else
-        v-for="catFact in facts"
+        v-for="(catFact, index) in facts"
         class="w-full sm:w-1/2 md:w-1/3 xl:w-1/4"
-        :key="catFact.fact.split(' ')[0]"
+        :key="catFact.fact.split(' ')[0] + index"
       >
         <div class="bg-white rounded-lg shadow-lg m-4 p-4">
           <h3>{{ catFact.fact }}</h3>
@@ -82,6 +83,7 @@ export default {
             method: "GET",
           }
         );
+        this.facts = [];
         this.facts = response.data;
         this.loading = false;
       } catch (error) {
