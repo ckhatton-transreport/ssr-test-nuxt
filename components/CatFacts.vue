@@ -9,7 +9,7 @@
         target="_blank"
       >https://catfact.ninja/#/Facts/getFacts</a>) via fetch.
     </p>
-    <div>
+    <div class="flex justify-center">
       <button
         class="
           bg-gray-300
@@ -20,6 +20,7 @@
           px-4
           rounded-l
         "
+        :disabled="isDisabled"
         @click="loadPreviousPage"
       >
         Previous
@@ -66,6 +67,13 @@ export default {
       loading: false,
     };
   },
+  computed: {
+    isDisabled() {
+      if (this.currentPage === 1) {
+        return true;
+      } else return false;
+    },
+  },
 
   mounted() {
     this.getFacts(2);
@@ -95,10 +103,8 @@ export default {
     },
 
     loadPreviousPage() {
-      if (this.currentPage != 1) {
-        this.currentPage--;
-        this.getFacts();
-      }
+      this.currentPage--;
+      this.getFacts();
     },
   },
 };
