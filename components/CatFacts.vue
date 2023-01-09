@@ -8,7 +8,7 @@
         >https://catfact.ninja/#/Facts/getFacts</a
       >) via fetch.
     </p>
-    <div>
+    <div class="flex justify-center">
       <button
         @click="loadPreviousPage"
         class="
@@ -20,6 +20,7 @@
           px-4
           rounded-l
         "
+        :disabled="isDisabled"
       >
         Previous
       </button>
@@ -63,6 +64,13 @@ export default {
       loading: false,
     };
   },
+  computed: {
+    isDisabled() {
+      if (this.currentPage === 1) {
+        return true;
+      } else return false;
+    },
+  },
 
   methods: {
     async getFacts(event) {
@@ -88,10 +96,8 @@ export default {
     },
 
     loadPreviousPage() {
-      if (this.currentPage != 1) {
-        this.currentPage--;
-        this.getFacts();
-      }
+      this.currentPage--;
+      this.getFacts();
     },
   },
 
