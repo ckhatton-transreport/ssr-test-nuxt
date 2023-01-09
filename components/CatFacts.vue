@@ -102,7 +102,7 @@ export default {
   },
 
   mounted() {
-    this.getFacts(2);
+    this.getFacts(this.currentPage);
   },
 };
 </script>
