@@ -79,6 +79,10 @@ export default {
     this.getFacts(2);
   },
 
+  mounted() {
+    this.getFacts(this.currentPage);
+  },
+
   methods: {
     async getFacts(event) {
       try {
