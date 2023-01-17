@@ -1,7 +1,5 @@
 <template>
   <div class="max-w-7xl mx-auto">
-    <NuxtLayout>
-      <CatFacts />
-    </NuxtLayout>
+    <CatFacts />
   </div>
 </template>
