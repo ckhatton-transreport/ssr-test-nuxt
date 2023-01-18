@@ -1,16 +1,16 @@
 <template>
   <div class="mb-4 p-4">
-    <h2 class="text-2xl">Cat Facts 🐈</h2>
+    <h2 class="text-2xl">
+      Cat Facts 🐈
+    </h2>
     <p class="my-4">
       This grabs cat facts from an API (<a
         href="https://catfact.ninja/#/Facts/getFacts"
         target="_blank"
-        >https://catfact.ninja/#/Facts/getFacts</a
-      >) via fetch.
+      >https://catfact.ninja/#/Facts/getFacts</a>) via fetch.
     </p>
     <div class="flex justify-center">
       <button
-        @click="loadPreviousPage"
         class="
           bg-gray-300
           hover:bg-gray-400
@@ -21,11 +21,11 @@
           rounded-l
         "
         :disabled="isDisabled"
+        @click="loadPreviousPage"
       >
         Previous
       </button>
       <button
-        @click="loadNextPage"
         class="
           bg-gray-300
           hover:bg-gray-400
@@ -35,18 +35,24 @@
           px-4
           rounded-r
         "
+        @click="loadNextPage"
       >
         Next
       </button>
     </div>
     <section class="flex flex-wrap relative">
-      <div class="absolute" v-if="loading">
-        <div class="flex items-center justify-center w-full">Loading</div>
+      <div
+        v-if="loading"
+        class="absolute"
+      >
+        <div class="flex items-center justify-center w-full">
+          Loading
+        </div>
       </div>
       <div
         v-for="(catFact, index) in facts"
-        class="w-full sm:w-1/2 md:w-1/3 xl:w-1/4"
         :key="catFact.fact.split(' ')[0] + index"
+        class="w-full sm:w-1/2 md:w-1/3 xl:w-1/4"
       >
         <div class="bg-white rounded-lg shadow-lg m-4 p-4">
           <h3>{{ catFact.fact }}</h3>
@@ -73,8 +79,12 @@ export default {
     },
   },
 
+  mounted() {
+    this.getFacts(this.currentPage);
+  },
+
   methods: {
-    async getFacts(event) {
+    async getFacts() {
       try {
         this.loading = true;
         const response = await $fetch(
@@ -101,10 +111,6 @@ export default {
       this.currentPage--;
       this.getFacts();
     },
-  },
-
-  mounted() {
-    this.getFacts(this.currentPage);
   },
 };
 </script>
