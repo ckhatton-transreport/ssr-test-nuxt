@@ -9,32 +9,16 @@
         target="_blank"
       >https://catfact.ninja/#/Facts/getFacts</a>) via fetch.
     </p>
-    <div class="flex justify-center">
+    <div class="pagination flex justify-center">
       <button
-        class="
-          bg-gray-300
-          hover:bg-gray-400
-          text-gray-800
-          font-bold
-          py-2
-          px-4
-          rounded-l
-        "
+        class="previous"
         :disabled="isDisabled"
         @click="loadPreviousPage"
       >
         Previous
       </button>
       <button
-        class="
-          bg-gray-300
-          hover:bg-gray-400
-          text-gray-800
-          font-bold
-          py-2
-          px-4
-          rounded-r
-        "
+        class="next"
         @click="loadNextPage"
       >
         Next
@@ -117,3 +101,15 @@ export default {
   },
 };
 </script>
+
+<style lang="sass" scoped>
+.pagination
+  button
+    @apply cursor-pointer bg-gray-300 hover:bg-gray-400 py-2 px-4 hover:shadow-lg
+
+    &.previous
+      @apply rounded-l
+
+    &.next
+      @apply rounded-r
+</style>
