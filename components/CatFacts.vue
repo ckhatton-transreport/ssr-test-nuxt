@@ -50,10 +50,8 @@
         </div>
       </div>
       <div
-        v-for="catFact in facts"
-        v-else
-        :key="catFact.fact.split(' ')[0]"
-        :key="catFact.fact.split(' ')[0]"
+        v-for="(catFact, index) in facts"
+        :key="catFact.fact.split(' ')[0] + index"
         class="w-full sm:w-1/2 md:w-1/3 xl:w-1/4"
       >
         <div class="bg-white rounded-lg shadow-lg m-4 p-4">
@@ -82,15 +80,11 @@ export default {
   },
 
   mounted() {
-    this.getFacts(2);
-  },
-
-  mounted() {
     this.getFacts(this.currentPage);
   },
 
   methods: {
-    async getFacts(event) {
+    async getFacts() {
       try {
         this.loading = true;
         const response = await $fetch(
