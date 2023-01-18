@@ -40,22 +40,25 @@
         Next
       </button>
     </div>
-    <section class="flex flex-wrap relative">
+    <section class="relative flex justify-center">
       <div
-        v-if="loading"
-        class="absolute"
+        :class="loading ? 'opacity-100' : 'opacity-0'"
+        class="loading absolute top-12 bg-white rounded-lg shadow-lg p-4 z-10 transition-opacity duration-300"
       >
-        <div class="flex items-center justify-center w-full">
-          Loading
-        </div>
+        <span class="text-xl">Loading</span>
       </div>
       <div
-        v-for="(catFact, index) in facts"
-        :key="catFact.fact.split(' ')[0] + index"
-        class="w-full sm:w-1/2 md:w-1/3 xl:w-1/4"
+        :class="{ 'opacity-40': loading }"
+        class="facts flex flex-wrap"
       >
-        <div class="bg-white rounded-lg shadow-lg m-4 p-4">
-          <h3>{{ catFact.fact }}</h3>
+        <div
+          v-for="(catFact, index) in facts"
+          :key="catFact.fact.split(' ')[0] + index"
+          class="w-full sm:w-1/2 md:w-1/3 xl:w-1/4"
+        >
+          <div class="bg-white rounded-lg shadow-lg m-4 p-4">
+            <h3>{{ catFact.fact }}</h3>
+          </div>
         </div>
       </div>
     </section>
