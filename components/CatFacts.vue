@@ -12,13 +12,17 @@
     <div class="pagination flex justify-center">
       <button
         class="previous"
-        :disabled="isDisabled"
+        :disabled="isPreviousDisabled"
         @click="loadPreviousPage"
       >
         Previous
       </button>
+      <div class="index">
+        <span>{{ currentPage }}</span>&nbsp;of&nbsp;<span>{{ lastPage }}</span>
+      </div>
       <button
         class="next"
+        :disabled="isNextDisabled"
         @click="loadNextPage"
       >
         Next
@@ -51,18 +55,21 @@
 <script>
 export default {
   name: "CatFacts",
+
   data() {
     return {
       facts: {},
       currentPage: 1,
+      lastPage: 1,
       loading: false,
     };
   },
   computed: {
-    isDisabled() {
-      if (this.currentPage === 1) {
-        return true;
-      } else return false;
+    isPreviousDisabled() {
+      return this.currentPage === 1;
+    },
+    isNextDisabled() {
+      return this.currentPage === this.lastPage;
     },
   },
 
@@ -80,8 +87,8 @@ export default {
             method: "GET",
           }
         );
-        this.facts = [];
         this.facts = response.data;
+        this.lastPage = response.last_page;
         this.loading = false;
       } catch (error) {
         this.loading = false;
@@ -105,11 +112,17 @@ export default {
 <style lang="sass" scoped>
 .pagination
   button
-    @apply cursor-pointer bg-gray-300 hover:bg-gray-400 py-2 px-4 hover:shadow-lg
+    @apply bg-gray-300 py-2 px-4
+
+    &:not([disabled])
+      @apply cursor-pointer hover:bg-gray-400 hover:shadow-lg
 
     &.previous
       @apply rounded-l
 
     &.next
       @apply rounded-r
+
+  .index
+    @apply flex justify-center items-center bg-gray-300 py-2 px-4
 </style>
