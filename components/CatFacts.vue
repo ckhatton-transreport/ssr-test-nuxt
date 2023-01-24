@@ -9,6 +9,12 @@
         target="_blank"
       >https://catfact.ninja/#/Facts/getFacts</a>) via fetch.
     </p>
+    <p
+      v-if="maxLength"
+      class="my-4"
+    >
+      The facts have been limited to a fact length of {{ maxLength }}.
+    </p>
     <div class="pagination flex justify-center">
       <button
         class="previous"
@@ -54,12 +60,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onBeforeMount } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue';
+import { useRoute } from 'vue-router';
+const route = useRoute();
 
 const facts = ref([]),
       currentPage = ref(1),
       lastPage = ref(1),
-      loading = ref(false);
+      loading = ref(false),
+      maxLength = ref(route.params.id || null);
 
 const isPreviousDisabled = computed(() => currentPage.value === 1);
 const isNextDisabled = computed(() => currentPage.value === lastPage.value);
@@ -71,8 +80,9 @@ onBeforeMount(() => {
 async function getFacts() {
   try {
     loading.value = true;
+    const maxLengthQuery = maxLength.value ? `max_length=${maxLength.value}&` : '';
     const response = await $fetch(
-      `https://catfact.ninja/facts?page=${currentPage.value}`,
+      `https://catfact.ninja/facts?${maxLengthQuery}page=${currentPage.value}`,
       {
         method: "GET",
       }
@@ -97,7 +107,7 @@ function loadPreviousPage() {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .pagination
   button
     @apply bg-gray-300 py-2 px-4
