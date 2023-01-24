@@ -37,7 +37,7 @@
     <section class="relative flex justify-center">
       <div
         :class="loading ? 'opacity-100' : 'opacity-0'"
-        class="loading absolute top-12 bg-white rounded-lg shadow-lg p-4 z-10 transition-opacity duration-300"
+        class="loading"
       >
         <span class="text-xl">Loading</span>
       </div>
@@ -123,4 +123,7 @@ function loadPreviousPage() {
 
   .index
     @apply flex justify-center items-center bg-gray-300 py-2 px-4
+
+.loading
+  @apply absolute top-12 bg-white rounded-lg shadow-lg p-4 z-10 transition-opacity duration-300
 </style>
