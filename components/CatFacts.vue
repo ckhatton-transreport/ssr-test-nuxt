@@ -4,10 +4,12 @@
       Cat Facts 🐈
     </h2>
     <p class="my-4">
-      This grabs cat facts from an API (<a
-        href="https://catfact.ninja/#/Facts/getFacts"
+      This grabs cat facts from an API <NuxtLink
+        to="https://catfact.ninja/#/Facts/getFacts"
         target="_blank"
-      >https://catfact.ninja/#/Facts/getFacts</a>) via fetch.
+      >
+        (https://catfact.ninja/#/Facts/getFacts)
+      </NuxtLink> via fetch.
     </p>
     <p
       v-if="maxLength"
@@ -59,8 +61,8 @@
   </div>
 </template>
 
-<script setup>
-import { ref, computed, onBeforeMount } from 'vue';
+<script setup lang="ts">
+// import { ref, computed, onBeforeMount } from 'vue';
 
 const props = defineProps({
   maxLength: {
@@ -69,29 +71,29 @@ const props = defineProps({
   }
 })
 
-const facts = ref([]),
-      currentPage = ref(1),
+let   facts: object[] = [];
+const currentPage = ref(1),
       lastPage = ref(1),
       loading = ref(false);
 
-const isPreviousDisabled = computed(() => currentPage.value === 1);
-const isNextDisabled = computed(() => currentPage.value === lastPage.value);
+const isPreviousDisabled = computed((): boolean => currentPage.value === 1);
+const isNextDisabled = computed((): boolean => currentPage.value === lastPage.value);
 
-onBeforeMount(() => {
-  getFacts(currentPage);
+onBeforeMount((): void => {
+  getFacts();
 });
 
 async function getFacts() {
   try {
     loading.value = true;
     const maxLengthQuery = props.maxLength ? `max_length=${props.maxLength}&` : '';
-    const response = await $fetch(
+    const response: { data: object[], last_page: number } = await $fetch(
       `https://catfact.ninja/facts?${maxLengthQuery}page=${currentPage.value}`,
       {
         method: "GET",
       }
     );
-    facts.value = response.data;
+    facts = response.data;
     lastPage.value = response.last_page;
     loading.value = false;
   } catch (error) {
@@ -100,12 +102,12 @@ async function getFacts() {
   }
 }
 
-function loadNextPage() {
+function loadNextPage(): void {
   currentPage.value++;
   getFacts();
 }
 
-function loadPreviousPage() {
+function loadPreviousPage(): void {
   currentPage.value--;
   getFacts();
 }

@@ -11,9 +11,7 @@ export default {
 </script>
 
 <script setup>
-// import { ref } from 'vue';
 // import { useRoute } from 'vue-router';
-const route = useRoute();
 
-const maxLength = ref(Number(route.params.maxLength) || null);
+const maxLength = Number(useRoute().params.maxLength) || null;
 </script>
