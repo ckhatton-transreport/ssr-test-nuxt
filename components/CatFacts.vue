@@ -61,14 +61,18 @@
 
 <script setup>
 import { ref, computed, onBeforeMount } from 'vue';
-import { useRoute } from 'vue-router';
-const route = useRoute();
+
+const props = defineProps({
+  maxLength: {
+    type: Number,
+    default: null
+  }
+})
 
 const facts = ref([]),
       currentPage = ref(1),
       lastPage = ref(1),
-      loading = ref(false),
-      maxLength = ref(route.params.id || null);
+      loading = ref(false);
 
 const isPreviousDisabled = computed(() => currentPage.value === 1);
 const isNextDisabled = computed(() => currentPage.value === lastPage.value);
@@ -80,7 +84,7 @@ onBeforeMount(() => {
 async function getFacts() {
   try {
     loading.value = true;
-    const maxLengthQuery = maxLength.value ? `max_length=${maxLength.value}&` : '';
+    const maxLengthQuery = props.maxLength ? `max_length=${props.maxLength}&` : '';
     const response = await $fetch(
       `https://catfact.ninja/facts?${maxLengthQuery}page=${currentPage.value}`,
       {
