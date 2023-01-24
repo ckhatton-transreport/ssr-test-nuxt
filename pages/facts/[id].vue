@@ -86,7 +86,7 @@ export default {
       try {
         this.loading = true;
         const response = await $fetch(
-          `https://catfact.ninja/facts?max_length=${this.$route.params.id}`,
+          `https://catfact.ninja/facts?max_length=${this.$route.params.id}&page=${this.currentPage}`,
           {
             method: "GET",
           }
