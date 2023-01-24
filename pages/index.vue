@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'PageHome'
+  name: 'PagesHome'
 }
 </script>
 

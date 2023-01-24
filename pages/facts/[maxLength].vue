@@ -6,14 +6,14 @@
 
 <script>
 export default {
-  name: 'PageFactsMaxLength'
+  name: 'PagesFactsMaxLength'
 }
 </script>
 
 <script setup>
-import { ref } from 'vue';
-import { useRoute } from 'vue-router';
+// import { ref } from 'vue';
+// import { useRoute } from 'vue-router';
 const route = useRoute();
 
-const maxLength = ref(Number(route.params.id) || null);
+const maxLength = ref(Number(route.params.maxLength) || null);
 </script>
