@@ -1,22 +1,25 @@
 <template>
   <div class="mb-4 p-4">
-    <h2 class="text-2xl">
-      Cat Facts 🐈
-    </h2>
-    <p class="my-4">
-      This grabs cat facts from an API <NuxtLink
-        to="https://catfact.ninja/#/Facts/getFacts"
-        target="_blank"
-      >
-        (https://catfact.ninja/#/Facts/getFacts)
-      </NuxtLink> via fetch.
-    </p>
-    <p
-      v-if="maxLength"
-      class="my-4"
-    >
-      The facts have been limited to a fact length of {{ maxLength }}.
-    </p>
+    <div class="flex">
+      <img
+        class="w-96 h-93 mr-6 mb-6"
+        src="~/assets/img/kitten.jpeg"
+        alt="Kitten photo"
+      />
+      <div>
+        <h2 class="text-2xl">Cat Facts 🐈</h2>
+        <p class="my-4">
+          This grabs cat facts from an API
+          <NuxtLink to="https://catfact.ninja/#/Facts/getFacts" target="_blank">
+            (https://catfact.ninja/#/Facts/getFacts)
+          </NuxtLink>
+          via fetch.
+        </p>
+        <p v-if="maxLength" class="my-4">
+          The facts have been limited to a fact length of {{ maxLength }}.
+        </p>
+      </div>
+    </div>
     <div class="pagination flex justify-center">
       <button
         class="previous"
@@ -26,27 +29,18 @@
         Previous
       </button>
       <div class="index">
-        <span>{{ currentPage }}</span>&nbsp;of&nbsp;<span>{{ lastPage }}</span>
+        <span>{{ currentPage }}</span
+        >&nbsp;of&nbsp;<span>{{ lastPage }}</span>
       </div>
-      <button
-        class="next"
-        :disabled="isNextDisabled"
-        @click="loadNextPage"
-      >
+      <button class="next" :disabled="isNextDisabled" @click="loadNextPage">
         Next
       </button>
     </div>
     <section class="relative flex justify-center">
-      <div
-        :class="loading ? 'opacity-100' : 'opacity-0'"
-        class="loading"
-      >
+      <div :class="loading ? 'opacity-100' : 'opacity-0'" class="loading">
         <span class="text-xl">Loading</span>
       </div>
-      <div
-        :class="{ 'opacity-40': loading }"
-        class="facts flex flex-wrap"
-      >
+      <div :class="{ 'opacity-40': loading }" class="facts flex flex-wrap">
         <div
           v-for="(catFact, index) in facts"
           :key="catFact.fact.split(' ')[0] + index"
@@ -67,17 +61,19 @@
 const props = defineProps({
   maxLength: {
     type: Number,
-    default: null
-  }
-})
+    default: null,
+  },
+});
 
-let   facts: object[] = [];
+let facts: object[] = [];
 const currentPage = ref(1),
-      lastPage = ref(1),
-      loading = ref(false);
+  lastPage = ref(1),
+  loading = ref(false);
 
 const isPreviousDisabled = computed((): boolean => currentPage.value === 1);
-const isNextDisabled = computed((): boolean => currentPage.value === lastPage.value);
+const isNextDisabled = computed(
+  (): boolean => currentPage.value === lastPage.value
+);
 
 onBeforeMount((): void => {
   getFacts();
@@ -86,8 +82,10 @@ onBeforeMount((): void => {
 async function getFacts() {
   try {
     loading.value = true;
-    const maxLengthQuery = props.maxLength ? `max_length=${props.maxLength}&` : '';
-    const response: { data: object[], last_page: number } = await $fetch(
+    const maxLengthQuery = props.maxLength
+      ? `max_length=${props.maxLength}&`
+      : "";
+    const response: { data: object[]; last_page: number } = await $fetch(
       `https://catfact.ninja/facts?${maxLengthQuery}page=${currentPage.value}`,
       {
         method: "GET",
