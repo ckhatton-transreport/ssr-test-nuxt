@@ -1,8 +1,8 @@
 <template>
   <div class="mb-4 p-4">
-    <div class="flex">
+    <div class="flex flex-wrap justify-center">
       <img
-        class="w-96 h-93 mr-6 mb-6"
+        class="w-96 h-93 lg:mr-6 mb-6"
         src="~/assets/img/kitten.jpeg"
         alt="Kitten photo"
       >
