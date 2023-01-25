@@ -25,6 +25,12 @@ export default {
 }
 </script>
 
+<script setup>
+import { CatFactsStore } from '@/components/CatFactsStore';
+
+CatFactsStore.maxLength = -1;
+</script>
+
 <style lang="sass">
   .button
     @apply block px-6 py-3 m-2 text-blue-100 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:underline hover:text-blue-200 text-center

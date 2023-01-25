@@ -9,3 +9,9 @@ export default {
   name: 'PagesFacts'
 }
 </script>
+
+<script setup>
+import { CatFactsStore } from '@/components/CatFactsStore';
+
+CatFactsStore.maxLength = -1;
+</script>
