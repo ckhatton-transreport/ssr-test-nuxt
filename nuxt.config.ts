@@ -2,6 +2,8 @@
 export default defineNuxtConfig({
   modules: [
     // https://tailwindcss.nuxtjs.org
-    '@nuxtjs/tailwindcss'
-  ],
+    '@nuxtjs/tailwindcss',
+    // https://nuxt.com/docs/guide/directory-structure/content
+    '@nuxt/content'
+  ]
 })
