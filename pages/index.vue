@@ -13,6 +13,12 @@
       >
         Facts length 30
       </NuxtLink>
+      <NuxtLink
+        class="button"
+        to="/content"
+      >
+        Content
+      </NuxtLink>
     </div>
 
     <BaseCatFacts />
