@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-7xl mx-auto">
-    <CatFacts />
+    <BaseCatFacts />
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
 
 <script setup>
 // import { useRoute } from 'vue-router';
-import { CatFactsStore } from '@/components/CatFactsStore';
+// import { CatFactsStore } from '@/composables/CatFactsStore';
 
 CatFactsStore.maxLength = Number(useRoute().params.maxLength) || -1;
 </script>

@@ -45,7 +45,7 @@
 
 <script setup lang="ts">
 // import { onBeforeMount } from 'vue';
-import { CatFactsStore } from '@/components/CatFactsStore';
+// import { CatFactsStore } from '@/composables/CatFactsStore';
 
 onBeforeMount((): void => {
   CatFactsStore.getFacts();

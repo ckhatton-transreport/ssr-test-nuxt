@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-7xl mx-auto">
-    <CatFacts />
+    <BaseCatFacts />
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <script setup>
-import { CatFactsStore } from '@/components/CatFactsStore';
+// import { CatFactsStore } from '@/composables/CatFactsStore';
 
 CatFactsStore.maxLength = -1;
 </script>
