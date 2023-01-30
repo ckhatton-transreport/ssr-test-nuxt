@@ -1,11 +1,13 @@
 <template>
   <div class="mb-4 p-4">
     <div class="flex flex-wrap justify-center">
-      <img
+      <nuxt-img
         class="w-96 h-93 lg:mr-6 mb-6"
-        src="~/assets/img/kitten.jpeg"
+        src="/img/kitten.jpeg"
         alt="Kitten photo"
-      >
+        width="384px"
+        height="256px"
+      />
       <div>
         <h2 class="text-2xl">
           Cat Facts 🐈
